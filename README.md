@@ -22,4 +22,5 @@ Then run python.manage.py runserver
 	This starts the server running at http://localhost:8000 as long as you leave the command running in the terminal window you started it in
 
 
-
+To generate users:
+  python scripts/generate_users.py 5
