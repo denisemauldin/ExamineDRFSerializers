@@ -9,7 +9,7 @@ Generates random users, profiles and game entries for testing.
 """
 
 import string
-import datetime
+import datetime as dt
 import os
 import sys
 import random
@@ -24,6 +24,7 @@ if __name__ == "__main__":
 import django
 django.setup()
 from django.contrib.auth.models import User
+from edrf.profiles.models import Profile
 
 
 def get_random_string(length, stringset=string.ascii_letters):
@@ -40,6 +41,18 @@ def generate_users(n):
             email=get_random_string(16) + '@' + get_random_string(16) + '.com',
         )
         new_user.save()
+
+        startdate=dt.date(1950,1,1)
+        nbdays=(dt.date.today()-startdate).days
+        d=random.randint(0,nbdays)
+        birth_date=startdate+dt.timedelta(days=d)
+
+        profile = Profile.objects.filter(user=new_user)
+        profile.update(
+                role=random.choice([1,2,3]),
+                birthdate=birth_date,
+                location=get_random_string(10)
+                )
 
 def main(argv):
     if argv.__len__() < 2:

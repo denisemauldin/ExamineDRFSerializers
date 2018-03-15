@@ -3,6 +3,7 @@ from rest_framework import permissions, routers
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import NotFound
 
+import edrf.profiles.apiviews as profile_views
 import edrf.users.apiviews as user_views
 
 
@@ -16,4 +17,5 @@ class EDRFRouter(routers.DefaultRouter):
 
 router = EDRFRouter()
 
-router.register (r'users', user_views.UserViewSet, 'users')
+router.register(r'users', user_views.UserViewSet, 'users')
+router.register(r'profiles', profile_views.ProfileViewSet, 'profiles')

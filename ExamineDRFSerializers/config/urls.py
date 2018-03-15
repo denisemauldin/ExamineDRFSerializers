@@ -19,6 +19,7 @@ import rest_framework
 
 import config.apirouter as apirouter
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # REST API
